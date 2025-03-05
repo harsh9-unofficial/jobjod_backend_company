@@ -1,0 +1,19 @@
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/db");
+
+const Job = sequelize.define("Job", {
+  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+  jobTitle: { type: DataTypes.STRING, allowNull: false },
+  interviewPersonName: { type: DataTypes.STRING, allowNull: false },
+  industry: { type: DataTypes.STRING, unique: true, allowNull: false },
+  department: { type: DataTypes.STRING, allowNull: false },
+  expiryTime: { type: DataTypes.INTEGER, allowNull: false },
+  joiningDate: { type: DataTypes.DATEONLY, allowNull: false },
+  salary: { type: DataTypes.STRING, allowNull: false },
+  noticePeriod: { type: DataTypes.STRING, allowNull: false },
+  responsibility: { type: DataTypes.STRING, allowNull: false },
+  qualification: { type: DataTypes.STRING, allowNull: false },
+  skills: { type: DataTypes.STRING, allowNull: false },
+});
+
+module.exports = Job;
