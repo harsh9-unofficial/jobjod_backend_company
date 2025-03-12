@@ -3,6 +3,14 @@ const sequelize = require("../config/db");
 
 const Job = sequelize.define("Job", {
   id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: "companyLogin", // The target model is 'Companies'
+      key: "id",
+    },
+  },
   jobTitle: { type: DataTypes.STRING, allowNull: false },
   interviewPersonName: { type: DataTypes.STRING, allowNull: false },
   industry: { type: DataTypes.STRING, unique: true, allowNull: false },

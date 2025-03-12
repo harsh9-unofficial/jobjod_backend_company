@@ -10,7 +10,7 @@ const About = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "Companies",
+        model: "companyLogin", // The target model is 'Companies'
         key: "id",
       },
     },

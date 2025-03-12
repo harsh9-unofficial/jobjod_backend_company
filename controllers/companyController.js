@@ -6,21 +6,23 @@ require("dotenv").config();
 // Create a new company
 exports.createCompany = async (req, res) => {
   const {
-    founderName,
+    userId,
     companyName,
+    interviewerName,
     email,
     password,
     yearEst,
     phone,
     location,
     website,
+    pincode,
   } = req.body;
 
   try {
     // Check if the company already exists
-    const existingCompany = await Company.findOne({ where: { email } });
+    const existingCompany = await Company.findOne({ where: { userId } });
     if (existingCompany) {
-      return res.status(400).json({ message: "Email already in use" });
+      return res.status(400).json({ message: "Company User Already Exists" });
     }
 
     // Hash password
@@ -28,14 +30,16 @@ exports.createCompany = async (req, res) => {
 
     // Create new company
     const company = await Company.create({
-      founderName,
+      userId,
       companyName,
+      interviewerName,
       email,
       password: hashedPassword,
       yearEst,
       phone,
       location,
       website,
+      pincode,
     });
 
     // Return the created company (excluding password)

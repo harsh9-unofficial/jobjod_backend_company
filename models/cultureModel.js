@@ -13,7 +13,7 @@ const Culture = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "Companies", // The target model is 'Companies'
+        model: "companyLogin", // The target model is 'Companies'
         key: "id",
       },
     },

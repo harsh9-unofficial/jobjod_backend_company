@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = require("../config/db"); // Assuming you have a sequelize instance setup
+const CompanyLogin = require("./loginModel");
 
 // Define the Legal model
 const Legal = sequelize.define(
@@ -14,7 +15,7 @@ const Legal = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "Companies", // The target model is 'Companies'
+        model: "companyLogin", // The target model is 'Companies'
         key: "id",
       },
     },
@@ -42,9 +43,11 @@ const Legal = sequelize.define(
     timestamps: true, // Store the created and updated timestamps
     tableName: "legals",
   }
-);
-
-// Sync the model with the database (make sure this runs when the app starts)
-Legal.sync();
+); 
+// Sync Login table first
+CompanyLogin.sync().then(() => {
+  // Then sync the table
+  Legal.sync();
+});
 
 module.exports = Legal;
